@@ -1,0 +1,70 @@
+sql = """SELECT Distinct masking, request, response, hittime, response_time, msisdn
+            FROM(SELECT i.masking AS masking, 
+                    i.request AS request, 
+                    i.response AS response , 
+                    i.hittime AS hittime, 
+                    i.response_time AS response_time, 
+                    i.msisdn AS msisdn 
+                    FROM infozilion_logs v 
+                    Left JOIN infozilion_logs_backup i ON i.msisdn = v.msisdn WHERE DATE(i.hittime) BETWEEN %s AND %s) as info
+                    WHERE msisdn = %s and masking= %s limit 10"""
+    
+    today_date = datetime.date.today()
+    print(today_date)
+    flag = 0
+    columns=['Masking', 'request', 'response', 'hittime', 'response_time', 'msisdn' ]
+
+    val = ( fdate, tdate, '88' + msisdn, masking)
+    mycursor.execute(sql, val)
+    sql_results = mycursor.fetchall()
+    if len(sql_results)<= 0 :
+        flag = 1 # means no result found
+        
+    else:
+        #print("Logs infozilion logssssss report1: ")
+        
+        df = pd.DataFrame(sql_results, columns=['Masking', 'request', 'response', 'hittime', 'response_time', 'msisdn' ])
+        # Assuming your SQL result is stored in the variable 'sql_result'
+        df = pd.DataFrame.from_records(sql_results)
+        #df = df.drop(0, axis=1)
+        pd.set_option('display.max_colwidth', None)
+        #print(df)
+        for i in range(len(df[1])):
+            request = df[1].iloc[i].split(",")
+            request.pop(1)  # Remove the element at index 1
+            request.pop(5)  # Remove the element at index 5
+        
+        # Assign the modified list back to the DataFrame
+            df.at[i, 1] = ','.join(request)
+        #df.to_csv('output.csv')
+        sql_results = df.to_string()   
+        #print(sql_results)
+        mydb.close()
+        return sql_results
+        
+
+       
+
+    if flag == 1:
+        val = ( fdate, tdate, msisdn,)
+        mycursor.execute(sql, val)
+        sql_results = mycursor.fetchall()
+        if len(sql_results)<=0 :
+            flag = 2
+        else:
+            flag = 0
+            print("Logs infozilion logssssss report2: ")
+            df = pd.DataFrame(sql_results, columns=['Masking', 'request', 'response', 'hittime', 'response_time', 'msisdn' ])
+            # Assuming your SQL result is stored in the variable 'sql_result'
+            df = pd.DataFrame.from_records(sql_results)
+            print(df)
+    
+    if flag== 2:  
+        val = (fdate, tdate, msisdn[3:],)
+        mycursor.execute(sql, val)
+        sql_results = mycursor.fetchall()
+        print("Logs infozilion logssssss report3: ")
+        df = pd.DataFrame(sql_results, columns=['Masking', 'request', 'response', 'hittime', 'response_time', 'msisdn' ])
+        # Assuming your SQL result is stored in the variable 'sql_result'
+        df = pd.DataFrame.from_records(sql_results)
+        print(df)

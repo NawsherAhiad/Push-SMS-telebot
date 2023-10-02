@@ -1,0 +1,7 @@
+infozilion_logs
+block_multiple
+stake_holder_tb
+bulksms_log
+stakeholders
+BULKUSER.TBL_STAKEHOLDER_CR_INFO
+BULKSMSPLUS.TBL_STAKEHOLDER_CR_INFO
