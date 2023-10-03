@@ -5,3 +5,5 @@ bulksms_log
 stakeholders
 BULKUSER.TBL_STAKEHOLDER_CR_INFO
 BULKSMSPLUS.TBL_STAKEHOLDER_CR_INFO
+all these tables are used
+
