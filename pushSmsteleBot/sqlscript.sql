@@ -5,6 +5,7 @@ CREATE TABLE smsbot (
 );
 
 
+#checking 
 INSERT INTO smsbot (username, chatid)
 VALUES ('ahied_mahi_SSL', '1387217956');
 
@@ -18,7 +19,5 @@ CREATE TABLE logs (
     
 );
 
-mezbah basic bank
 
-sept er count ta la
 
