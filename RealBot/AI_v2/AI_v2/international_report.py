@@ -20,10 +20,10 @@ def international_sms( msisdn, fdate, tdate, masking):
     result ="<b>INTERNATIONAL SMS: </b>\n\n"
     print(result)
     mydb = mysql.connector.connect(
-                host="192.168.81.17",
-                user="smsai",
-                password="SmsAI12k!@%32",
-                database="routesms"
+                host="1.1.1.1",
+                user="*****",
+                password="**********",
+                database="anotherdb"
     )
 
     mycursor = mydb.cursor()
