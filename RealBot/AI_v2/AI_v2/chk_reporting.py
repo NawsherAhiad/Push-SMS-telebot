@@ -39,10 +39,10 @@ def infozilion_logs_report(msisdn, fdate,tdate, masking):
     sql_results = ""
     
     mydb = mysql.connector.connect(
-                host="192.168.91.41",
-                user="smsai",
-                password="SmsAI12k!@%32",
-                database="bulkinfo"
+                host="0.0.0.0",
+                user="******",
+                password="***********",
+                database="*******"
     )
 
 
